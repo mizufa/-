@@ -1,0 +1,52 @@
+<h1>Books#show</h1>
+
+<div class="container">
+<div class="row">
+
+<div class="col-md-3">
+
+<%= render 'users/list', user: @user %><!--ユーザー詳細-->
+<%= render 'books/new', book: @books %><!--投稿フォーム-->
+</div>
+
+<div class="col-md-8 offset-md-1">
+<h2>Book detail</h2>
+<table class="table">
+  <tbody>
+  <tr>
+  <td>
+  <%= link_to user_path(@user) do %>
+  <% if @user.profile_image.attached? %>
+  %= image_tag @user.profile_image, size: "80x80" %>
+  <% else %>
+  <%= image_tag 'no_image', size: "80x80" %>
+  <% end %>
+  <br><%= @user.name %>
+  <% end %>
+  </td>
+  <td><%= @book.title %></td>
+  <td><%= @book.body %></td>
+
+  <% if @user.id == current_user.id %>
+    <td>
+      <li class="list-unstyled">
+        <%= link_to edit_book_path(@book.id), class: "btn btn-sm btn-success" do %>
+        Edit
+        <% end %>
+      </li>
+    </td>
+    <td>
+      <li class="list-unstyled">
+        <%= link_to book_path(@book.id), method: :delete, class: "btn btn-sm btn-danger", "data-confirm" => "本当に削除しますか？" do %>
+        Destroy
+        <% end %>
+      </li>
+    </td>
+  <% end %>
+  <tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+</div>

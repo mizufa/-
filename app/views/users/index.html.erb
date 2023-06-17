@@ -1,0 +1,70 @@
+<h1>Users#index</h1>
+
+<div class="container px-5 px-sm-0">
+<div class="row">
+
+  <!--ユーザーの詳細-->
+<div class="col-md-3">
+<h2>User info</h2>
+<% if @user.profile_image.attached? %>
+<%= image_tag @user.profile_image, size: "80x80" %>
+<% else %>
+<%= image_tag 'no_image', size: "80x80" %>
+<% end %>
+ <table class="table">
+  <tbody>
+  <tr>
+  <th>name</th>
+  <th><%= @user.name %></th>
+  </tr>
+  <tr>
+  <th>introduction</th>
+  <th><%= @user.introduction %></th>
+  </tr>
+  </tbody>
+  </table>
+  <div class="row">
+  <a class="btn btn-outline-secondary btn-block" href="/users/<%= @user.id %>/edit"><i class="fas fa-user-cog"></i></a>
+  </div>
+
+  <!--投稿フォーム_books/index.html.erbから-->
+ <%= render 'books/new', book: @book %>
+
+</div>
+
+<!--ユーザー一覧-->
+<div class="col-md-8 offset-md-1">
+  <h2>Users</h2>
+<table class="table table-hover table-inverse">
+<thead>
+<tr>
+  <th>image</th>
+  <th>name</th>
+  <th colspan="3"></th>
+  <th></th>
+</tr>
+</thead>
+<tbody>
+<% @users.each do |user| %>
+<tr>
+<td>
+  <% if user.profile_image.attached? %>
+  <%= image_tag user.profile_image, size: "80x80" %>
+  <% else %>
+  <%= image_tag 'no_image', size: "80x80" %>
+  <% end %>
+</td>
+<td>
+  <p><%= user.name %></p>
+</td>
+<td>
+  <%= link_to 'Show', user_path(user.id) %> <!--ユーザーの投稿一覧ページへリダイレクト-->
+</td>
+</tr>
+<% end %>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>

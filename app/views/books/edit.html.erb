@@ -1,0 +1,31 @@
+<div class="container">
+<div class="row">
+
+<div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+<h2>Editing Book</h2>
+
+<!--エラーメッセージの表示-->
+<% if @book.errors.any? %>
+<h3><%= @book.errors.count %>errors prohibited this obj from being saved:</h3>
+<ul>
+  <% @book.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_with model: @book, method: :patch do |f| %>
+<label>Title</label>
+<div class="form-group"><%= f.text_field :title %></div>
+<label>Opinion</label>
+<div class="form-group"><%= f.text_area :body %></div>
+  <input type="submit" name="commit" value="Update Book" class="btn btn-success" data-disable-with="Update Book"></input>
+<% end %>
+
+<%= link_to "Show", book_path(@book.id) %> <!--投稿ごとの詳細画面へ-->
+<%= " | " %>
+<%= link_to "Back", books_path %> <!--一覧画面へ-->
+</div>
+
+</div>
+</div>
